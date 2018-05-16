@@ -46,6 +46,18 @@ public class LinkedinLoginTest {
 		Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sing In button is missing");
 	}
 
+    @Test
+    public void verifyLoginWithValidUsernameAndShortPassword() {
+        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
+        linkedinLoginPage.login("iteatest@i.ua", "1");
+        Assert.assertEquals(linkedinLoginPage.getErrorMessageText(),
+                "There were one or more errors in your submission. Please correct the marked fields below.",
+                "Error message text is wrong.");
+    }
+
+
+
+
 
 
 }
