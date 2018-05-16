@@ -3,6 +3,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LinkedinLoginTest {
@@ -20,13 +21,21 @@ public class LinkedinLoginTest {
 		webDriver.close();
 	}
 
-	@Test
-	public void successfulLoginTest() {
+    @DataProvider
+    public Object[][] ValidDataProvider() {
+        return new Object[][]{
+                { "iteatest@i.ua", "1q2w3e_4r5t" },
+                { "iteatest@I.UA", "1q2w3e_4r5t" }
+        };
+    }
+
+    @Test(dataProvider = "ValidDataProvider")
+	public void successfulLoginTest(String userEmail, String userPassword) {
 		LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 		Assert.assertEquals(linkedinLoginPage.getCurrentPageTitle(), "LinkedIn: Log In or Sign Up",
 				"Login page title is wrong.");
 
-		linkedinLoginPage.login("iteatest@i.ua", "1q2w3e_4r5t");
+		linkedinLoginPage.login(userEmail, userPassword);
 
 		LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
 
@@ -49,8 +58,9 @@ public class LinkedinLoginTest {
     @Test
     public void verifyLoginWithValidUsernameAndShortPassword() {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
         linkedinLoginPage.login("iteatest@i.ua", "1");
-        Assert.assertEquals(linkedinLoginPage.getErrorMessageText(),
+        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(),
                 "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Error message text is wrong.");
     }

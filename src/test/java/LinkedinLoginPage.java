@@ -12,8 +12,6 @@ public class LinkedinLoginPage {
 	private WebElement userPasswordField;
 	private WebElement signInButton;
 
-	private WebElement errorMesageElement;
-
 	public LinkedinLoginPage(WebDriver webDriver) {
 		this.webDriver = webDriver;
         initElements();
@@ -32,16 +30,6 @@ public class LinkedinLoginPage {
 		userPasswordField.sendKeys(userPassword);
 		signInButton.click();
 	}
-
-	public String getErrorMessageText() {
-        try {
-            sleep (5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        errorMesageElement = webDriver.findElement(By.xpath("//div[@role='alert']"));
-        return errorMesageElement.getText();
-    }
 
 	public boolean isSignInButtonDisplayed() {
 		return signInButton.isDisplayed();
