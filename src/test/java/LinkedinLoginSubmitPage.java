@@ -4,16 +4,19 @@ import org.openqa.selenium.WebElement;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinLoginSubmitPage {
+public class LinkedinLoginSubmitPage extends LinkedinBasePage {
 
-
-    private WebDriver webDriver;
-
+    private WebElement userEmailField;
     private WebElement errorMessageElement;
 
     public LinkedinLoginSubmitPage(WebDriver webDriver) {
-       this.webDriver = webDriver;
-       initElements();
+        super(webDriver);
+        initElements();
+    }
+
+    @Override
+    boolean isPageLoaded() {
+        return userEmailField.isDisplayed();
     }
 
     private void initElements() {
@@ -22,6 +25,7 @@ public class LinkedinLoginSubmitPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        userEmailField = webDriver.findElement(By.xpath("//input[@id='session_key-login']"));
         errorMessageElement = webDriver.findElement(By.xpath("//div[@role='alert']"));
     }
 

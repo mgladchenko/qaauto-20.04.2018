@@ -25,26 +25,21 @@ public class LinkedinLoginTest {
     public Object[][] ValidDataProvider() {
         return new Object[][]{
                 { "iteatest@i.ua", "1q2w3e_4r5t" },
-                { "iteatest@I.UA", "1q2w3e_4r5t" }
+                //{ "iteatest@I.UA", "1q2w3e_4r5t" }
         };
     }
 
     @Test(dataProvider = "ValidDataProvider")
 	public void successfulLoginTest(String userEmail, String userPassword) {
 		LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-		Assert.assertEquals(linkedinLoginPage.getCurrentPageTitle(), "LinkedIn: Log In or Sign Up",
-				"Login page title is wrong.");
+		Assert.assertTrue(linkedinLoginPage.isPageLoaded(),
+                "Login page is not loaded");
 
 		linkedinLoginPage.login(userEmail, userPassword);
 
 		LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
-
-		Assert.assertTrue(linkedinHomePage.isProfileMenuDisplayed(),
-				"Profile menu is not displayed after login");
-
-		//Fixme: use inheritance
-		Assert.assertEquals(linkedinLoginPage.getCurrentPageTitle(), "LinkedIn",
-				"Home page title is wrong.");
+		Assert.assertTrue(linkedinHomePage.isPageLoaded(),
+				"Home page is not loaded");
 
 	}
 
@@ -52,7 +47,7 @@ public class LinkedinLoginTest {
 	public void verifyLoginWithEmptyUsernameAndPassword() {
 		LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 		linkedinLoginPage.login("", "");
-		Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sing In button is missing");
+		Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login page is not loaded.");
 	}
 
     @Test
