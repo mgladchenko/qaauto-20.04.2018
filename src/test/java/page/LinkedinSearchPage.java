@@ -1,14 +1,17 @@
+package page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import page.LinkedinBasePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinSearchPage extends LinkedinBasePage{
+public class LinkedinSearchPage extends LinkedinBasePage {
     WebElement resultsCounter;
     List<WebElement> searchResults;
 
@@ -29,7 +32,7 @@ public class LinkedinSearchPage extends LinkedinBasePage{
     }
 
     @Override
-    boolean isPageLoaded() {
+    public boolean isPageLoaded() {
         return true;
         //return resultsCounter.isDisplayed();
     }
