@@ -1,3 +1,5 @@
+package util;
+
 import com.sun.mail.imap.IdleManager;
 
 import javax.mail.*;
@@ -20,7 +22,7 @@ public class GMailService {
 	private IdleManager idleManager;
 
 	/**
-	 * Example of GMailService usage
+	 * Example of util.GMailService usage
 	 * @param args - dummy args for main()
 	 */
 	public static void main(String[] args) {
@@ -28,14 +30,14 @@ public class GMailService {
 		String messageTo = "sst.tau@gmail.com";
 		String messageFrom = "SST TAU <sst.tau@gmail.com>";
 
-		GMailService gMailService = new GMailService();
+		GMailService gMailService = new GMailService("","");
 		gMailService.connect();
 		String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 10);
 		System.out.println("Content: " + message);
 	}
 
 	/**
-	 * Default GMailService constructor with predefined user/pass credentials
+	 * Default util.GMailService constructor with predefined user/pass credentials
 	 */
 	public GMailService(){
 		this.user = "sst.tau@gmail.com";
@@ -43,7 +45,7 @@ public class GMailService {
 	}
 
 	/**
-	 * Custom GMailService constructor that allows to set user/pass credentials
+	 * Custom util.GMailService constructor that allows to set user/pass credentials
 	 * @param user - gMail acc username
 	 * @param pass - gMail acc pass
 	 */
