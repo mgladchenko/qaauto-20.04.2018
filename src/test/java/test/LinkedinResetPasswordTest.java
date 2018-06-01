@@ -14,23 +14,28 @@ public class LinkedinResetPasswordTest extends LinkedinBaseTest{
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(),
                 "Login page is not loaded.");
 
-        LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.clickOnForgotPasswordLink();
+        LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage =
+                linkedinLoginPage.clickOnForgotPasswordLink();
         Assert.assertTrue(linkedinRequestPasswordResetPage.isPageLoaded(),
                 "RequestPasswordReset page is not loaded.");
 
-        LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage = linkedinRequestPasswordResetPage.submitUserEmail(userEmail);
+        LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage =
+                linkedinRequestPasswordResetPage.submitUserEmail(userEmail);
         Assert.assertTrue(linkedinRequestPasswordResetSubmitPage.isPageLoaded(),
                 "RequestPasswordResetSubmit page is not loaded.");
 
-        LinkedinSetNewPasswordPage setNewPasswordPage = linkedinRequestPasswordResetSubmitPage.navigateToLinkFromEmail();
+        LinkedinSetNewPasswordPage setNewPasswordPage =
+                linkedinRequestPasswordResetSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(setNewPasswordPage.isPageLoaded(),
                 "NewPasswordPage page is not loaded.");
 
-        LinkedinPasswordChangeConfirmedPage linkedinPasswordChangeConfirmedPage = setNewPasswordPage.setNewUserPassword();
+        LinkedinPasswordChangeConfirmedPage linkedinPasswordChangeConfirmedPage =
+                setNewPasswordPage.setNewUserPassword();
         Assert.assertTrue(linkedinPasswordChangeConfirmedPage.isPageLoaded(),
                 "PasswordChangeConfirmed page is not loaded.");
 
-        LinkedinHomePage linkedinHomePage = linkedinPasswordChangeConfirmedPage.clickOnGoToHomeButton();
+        LinkedinHomePage linkedinHomePage =
+                linkedinPasswordChangeConfirmedPage.clickOnGoToHomeButton();
         Assert.assertTrue(linkedinHomePage.isPageLoaded(),
                 "HomePage page is not loaded.");
 

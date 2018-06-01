@@ -18,17 +18,16 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
+        waitUntilElementIsClickable(resendLinkButton, 5);
         return resendLinkButton.isDisplayed();
     }
 
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
-        String messageSubject = "enter email subj here";
-        String messageTo = "sst.tau@gmail.com";
-        String messageFrom = "SST TAU <sst.tau@gmail.com>";
+        String messageSubject = "here's the link to reset your password";
+        String messageTo = "mykola.gladchenko@gmail.com";
+        String messageFrom = "security-noreply@linkedin.com";
 
-        GMailService gMailService = new GMailService("","");
-        gMailService.connect();
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 10);
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
 
         return new LinkedinSetNewPasswordPage(webDriver);
